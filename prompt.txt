@@ -1,4 +1,4 @@
-cd pycode/+ Workbooks/nhque-Workbook_06/minor_project
+cd pycode\+ Projects\PFSE_Minor_Project
 
 activate pfse 
 
