@@ -1,0 +1,5 @@
+cd pycode/+ Workbooks/nhque-Workbook_06/minor_project
+
+activate pfse 
+
+streamlit run app.py
