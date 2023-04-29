@@ -71,7 +71,7 @@ st.write("Shear: ", round(Vy,2), "kN")
 ## Using Section Properties Module
 ## ---------------------------------------------------------
 
-## Somehoew it didn't work for me when using the my functions from my custom module section_properties_module
+## Somehow it didn't work for me when using the my functions from my custom module section_properties_module
 ## So I made it here with using sectionproprties directly in app.py
 
 ## Using section_properties_module module 
@@ -137,11 +137,15 @@ if st.button('Calculate'):
     composite_geometry = mirrored_angle + box
     composite_geometry = ((box - mirrored_angle) + mirrored_angle)
     composite_geometry = composite_geometry.align_center()
+
+    ## Using Section Properties Module
+    ## ---------------------------------------------------------
     # st.pyplot(composite_geometry.plot_geometry().get_figure())
     # analysis_result = spm.perform_analysis(composite_geometry, Mxx*1000000, Vy*1000, 0)
     # st.pyplot(analysis_result.plot_stress_vm().get_figure())
 
-
+    ## Using sectionproperties directly in app.py 
+    ## ---------------------------------------------------------
     composite_geometry.create_mesh([20, 10])
     sec = Section(composite_geometry, time_info=True)
     sec.plot_mesh()
@@ -151,16 +155,6 @@ if st.button('Calculate'):
     result = sec.calculate_stress(Vy=Vy*1000, Mxx=Mxx*1000000, Mzz=0)
     st.pyplot(result.plot_stress_vm().get_figure())
 
-
-
-    # composite_geometry.create_mesh([20, 10])
-    # sec = Section(composite_geometry, time_info=True)
-    # sec.plot_mesh()
-    # sec.calculate_geometric_properties()
-    # sec.calculate_plastic_properties()
-    # sec.calculate_warping_properties()
-    # st.write("Shear centre: ", sec.get_sc())
-    # st.pyplot(sec.plot_centroids().get_figure())
 
 st.write("")
 st.write("")
