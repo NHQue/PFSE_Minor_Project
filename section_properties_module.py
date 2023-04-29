@@ -18,8 +18,8 @@ def make_box_section(d, b, t, r_out, material):
         d=d, 
         b=b, 
         t=t, 
-        r_out=r_out, 
-        n_r=9,
+        r_out=t*2, 
+        n_r=8,
         material=material
     )
     return box
@@ -29,8 +29,8 @@ def make_angle_section(l, t, r_out, material):
         d=l, 
         b=l, 
         t=t,
-        r_r=r_out, 
-        r_t=r_out, 
+        r_r=t/2, 
+        r_t=t/2, 
         n_r=9,
         material=material
     )
@@ -41,6 +41,7 @@ def make_composite_section(angle, box):
     mirrored_angle = (
         angle
         .mirror_section(axis='y')
+        .mirror_section(axis='x')
         .align_to(box, on="top", inner=True)
         .align_to(box, on='left')
         .shift_section(y_offset=-0)        
@@ -53,7 +54,7 @@ def make_composite_section(angle, box):
     return composite_geometry
 
 
-def perform_analysis(composite_geometry, Vy, Mzz):
+def perform_analysis(composite_geometry, Vy, Mxx, Mzz):
 
     composite_geometry.create_mesh([20, 10])
     sec = Section(composite_geometry, time_info=True)
@@ -61,7 +62,7 @@ def perform_analysis(composite_geometry, Vy, Mzz):
     sec.calculate_geometric_properties()
     sec.calculate_plastic_properties()
     sec.calculate_warping_properties()
-    result = sec.calculate_stress(Vy=Vy, Mzz=Mzz)
+    result = sec.calculate_stress(Vy=Vy, Mxx=Mxx, Mzz=Mzz)
 
     return result
 

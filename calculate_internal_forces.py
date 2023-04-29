@@ -1,5 +1,3 @@
-import math
-
 def calc_moment_shear_beam_udl(length, load, distance):
     """
     Doc strings

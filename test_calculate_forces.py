@@ -1,4 +1,4 @@
-import calculate_forces as cf
+import calculate_internal_forces as cf
 
 def test_calc_factored_load():
     result = cf.calc_factored_load(5, 8)
