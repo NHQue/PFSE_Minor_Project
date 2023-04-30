@@ -9,9 +9,6 @@ import sectionproperties.pre.library.steel_sections as steel_geom
 from sectionproperties.pre.pre import Material
 from sectionproperties.analysis.section import Section
 
-# import matplotlib
-# matplotlib.use("Agg")
-
 st.set_option('deprecation.showPyplotGlobalUse', False)
 
 # st.header("Composite Facade Beam")
@@ -25,7 +22,6 @@ with col1:
 with col2:
     sketch = Image.open('sketch.png')
     st.image(sketch, width=200)
-
 
 ## ---------------------------------------------------------
 ## SIDEBAR
@@ -48,7 +44,6 @@ st.sidebar.subheader("Second Beam - Angle")
 angle_length = st.sidebar.number_input("**Angle Length** ($mm$)", value=140, min_value= 70, max_value=260)
 angle_t = st.sidebar.number_input("**Angle t** ($mm$)", value=10, min_value= 4, max_value=20)
 
-
 ## ---------------------------------------------------------
 ## Assigning User Input to Variables
 ## ---------------------------------------------------------
@@ -65,7 +60,6 @@ Vy = cf.calc_moment_shear_beam_udl(length_input, design_load, pos_on_beam_input)
 st.write("Design Load: ", round(design_load,1), "kN/m")
 st.write("Moment: ", round(Mxx,2), "kNm")
 st.write("Shear: ", round(Vy,2), "kN")
-
 
 ## ---------------------------------------------------------
 ## Using Section Properties Module
@@ -154,7 +148,6 @@ if st.button('Calculate'):
     sec.calculate_warping_properties()
     result = sec.calculate_stress(Vy=Vy*1000, Mxx=Mxx*1000000, Mzz=0)
     st.pyplot(result.plot_stress_vm().get_figure())
-
 
 st.write("")
 st.write("")
